@@ -19,7 +19,6 @@ namespace WindowsFormsApp1
 
         private void check_Click(object sender, EventArgs e)
         {
-            label.Visible = false;
             result.Clear();
             int num1 = Convert.ToInt32(box1.Text);
             int num2 = Convert.ToInt32(box2.Text);
