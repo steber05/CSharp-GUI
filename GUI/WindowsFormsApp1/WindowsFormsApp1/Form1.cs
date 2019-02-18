@@ -100,7 +100,7 @@ namespace WindowsFormsApp1
 
 
         }
-
+        //Check if number is prime
         public bool primeNumber(int n)
         {
             for(int i = 2; i < n; i++)
@@ -112,7 +112,7 @@ namespace WindowsFormsApp1
             }
             return true;
         }
-
+        //Add prime numbers to a list
         public LinkedList<int> sortPrimes(LinkedList<int> nums)
         {
             LinkedList<int> lst = new LinkedList<int>();
@@ -125,7 +125,7 @@ namespace WindowsFormsApp1
             }
             return lst;
         }
-
+        //Display prime numbers to third text box with linesize of 5
         public void displayPrimes(LinkedList<int> primes)
         {
             int lineCount = 0;
