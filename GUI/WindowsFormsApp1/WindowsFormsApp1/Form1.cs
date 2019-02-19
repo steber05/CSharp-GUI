@@ -71,7 +71,7 @@ namespace WindowsFormsApp1
             LinkedList<int> lst = new LinkedList<int>();
             foreach (var num in nums)
             {
-                if (primeNumber(num) && num > 1)//Check if 1 and 0 are counted as prime numbers and adjust accordingly
+                if (primeNumber(num) && num > 1)//Check if 1 and 0 are counted as prime numbers and adjust
                 {
                     lst.AddLast(num);
                 }
