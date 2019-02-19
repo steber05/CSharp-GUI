@@ -20,15 +20,16 @@ namespace WindowsFormsApp1
         private void check_Click(object sender, EventArgs e)
         {            
             result.Clear();//Clear third textbox
-            int num1 = Convert.ToInt32(box1.Text);
-            int num2 = Convert.ToInt32(box2.Text);
-            LinkedList<int> nums = new LinkedList<int>();
-            LinkedList<int> primes = new LinkedList<int>();
-
+            int num1 = Convert.ToInt32(box1.Text);//Box 1
+            int num2 = Convert.ToInt32(box2.Text);//Box 2
+            LinkedList<int> nums = new LinkedList<int>();//Numbers between box 1 and box 2
+            LinkedList<int> primes = new LinkedList<int>();//Prime numbers in nums list
+            //Check number orientation
             nums = numberOrientation(num1, num2);
-
+            //Check if number is prime
+            //Add prime numbers to a list
             primes = sortPrimes(nums);
-
+            //Display prime numbers to third text box with linesize of 5
             displayPrimes(primes);
 
         }
