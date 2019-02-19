@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Math;
 
 namespace WindowsFormsApp1
 {
@@ -18,46 +19,24 @@ namespace WindowsFormsApp1
         }
 
         private void check_Click(object sender, EventArgs e)
-        {
-            result.Clear();
+        {            
+            result.Clear();//Clear third textbox
             int num1 = Convert.ToInt32(box1.Text);
             int num2 = Convert.ToInt32(box2.Text);
             LinkedList<int> nums = new LinkedList<int>();
             LinkedList<int> primes = new LinkedList<int>();
-            //int lineCount = 0;
 
-            /*if (num1 > 1)
-            {
-                for (int i = num1; i < num2 + 1; i++)
-                {
-                    nums.AddLast(i);
-                }
+            nums = numberOrientation(num1, num2);
 
-                foreach (var num in nums)
-                {
-                    if (primeNumber(num))
-                    {
-                        primes.AddLast(num);
-                    }
-                }
+            primes = sortPrimes(nums);
 
-                foreach (var p in primes)
-                {
-                    if (lineCount == 5)
-                    {
-                        result.AppendText("\r\n");
-                        lineCount = 0;
-                    }
-                    lineCount++;
-                    result.AppendText(Convert.ToString(p + " "));
-                }
-            }
-            else
-            {
-                label.Visible = true;
-            }*/
+            displayPrimes(primes);
 
-            //sort if num1 is bigger than num2 or vice versa
+        }
+        //Check number orientation
+        public LinkedList<int> numberOrientation(int num1, int num2)
+        {
+            LinkedList<int> nums = new LinkedList<int>();
             if (num1 < num2)
             {
                 for (int i = num1; i <= num2; i++)
@@ -72,38 +51,13 @@ namespace WindowsFormsApp1
                     nums.AddLast(i);
                 }
             }
-            
-            //sorts numbers from a list to another primes list
-            /*foreach (var num in nums)
-            {
-                if (primeNumber(num) && num > 1)
-                {
-                    primes.AddLast(num);
-                }
-            }*/
-
-            primes = sortPrimes(nums);
-
-            //Displays all prime numbers to third text box with a linesize of 5 numbers
-            /*foreach (var p in primes)
-            {
-                if (lineCount == 5)
-                {
-                    result.AppendText("\r\n");
-                    lineCount = 0;
-                }
-                lineCount++;
-                result.AppendText(Convert.ToString(p + " "));
-            }*/
-
-            displayPrimes(primes);
-
-
+            return nums;
         }
         //Check if number is prime
         public bool primeNumber(int n)
         {
-            for(int i = 2; i < n; i++)
+            
+            for(int i = 2; i < Math.Sqrt(n); i++)
             {
                 if ((n % i) == 0)
                 {
@@ -112,13 +66,13 @@ namespace WindowsFormsApp1
             }
             return true;
         }
-        //Add prime numbers to a list
+        //Add prime numbers to a list (Filters out 0 and 1)
         public LinkedList<int> sortPrimes(LinkedList<int> nums)
         {
             LinkedList<int> lst = new LinkedList<int>();
             foreach (var num in nums)
             {
-                if (primeNumber(num) && num > 1)
+                if (primeNumber(num) && num > 1)//Check if 1 and 0 are counted as prime numbers and adjust accordingly
                 {
                     lst.AddLast(num);
                 }
