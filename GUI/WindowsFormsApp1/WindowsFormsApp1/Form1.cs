@@ -56,23 +56,38 @@ namespace WindowsFormsApp1
         //Check if number is prime
         public bool primeNumber(int n)
         {
-            
-            for(int i = 2; i < n; i++)
+            //All the conditions for if it is not a prime number
+            //Cancel out 1 and 0
+            if(n < 2)
             {
-                if ((n % i) == 0)
+                return false;
+            }
+            //Cancel all even numbers except 2
+            else if (n % 2 == 0 && n != 2)
+            {
+                return false;
+            }
+            //Loop condition is i*i <= n (Square root)
+            else
+            {
+                for(int i = 2; i*i <= n; i++)
                 {
-                    return false;
+                    if (n % i == 0)
+                    {
+                        return false;
+                    }
                 }
             }
+            //If it is a prime number
             return true;
         }
-        //Add prime numbers to a list (Filters out 0 and 1)
+        //Add prime numbers to a list (Filters out 0 and 1) edited to not filter 1 and 0 as its done in primeNumber now
         public LinkedList<int> sortPrimes(LinkedList<int> nums)
         {
             LinkedList<int> lst = new LinkedList<int>();
             foreach (var num in nums)
             {
-                if (primeNumber(num) && num > 1)//Check if 1 and 0 are counted as prime numbers and adjust
+                if (primeNumber(num))//Removed error checking for 1 and 0 for this section
                 {
                     lst.AddLast(num);
                 }
