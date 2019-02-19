@@ -56,7 +56,7 @@ namespace WindowsFormsApp1
         public bool primeNumber(int n)
         {
             
-            for(int i = 2; i < Math.Sqrt(n); i++)
+            for(int i = 2; i < n; i++)
             {
                 if ((n % i) == 0)
                 {
