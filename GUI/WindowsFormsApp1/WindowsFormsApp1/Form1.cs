@@ -70,7 +70,7 @@ namespace WindowsFormsApp1
             //Loop condition is i*i <= n (Square root)
             else
             {
-                for(int i = 2; i*i <= n; i++)
+                for(int i = 2; i * i <= n; i++)
                 {
                     if (n % i == 0)
                     {
