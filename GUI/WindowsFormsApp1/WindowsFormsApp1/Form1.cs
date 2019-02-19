@@ -33,7 +33,7 @@ namespace WindowsFormsApp1
             displayPrimes(primes);
 
         }
-        //Check number orientation
+        //Check number orientation and add to nums list
         public LinkedList<int> numberOrientation(int num1, int num2)
         {
             LinkedList<int> nums = new LinkedList<int>();
