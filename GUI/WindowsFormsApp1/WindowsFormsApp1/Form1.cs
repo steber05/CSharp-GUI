@@ -20,22 +20,55 @@ namespace WindowsFormsApp1
         private void check_Click(object sender, EventArgs e)
         {            
             result.Clear();//Clear third textbox
-            int num1 = Int32.parse(box1.Text);//Box 1
-            int num2 = Int32.parse(box2.Text);//Box 2
-            int highNum;
+            int num1 = Int32.Parse(box1.Text);
+            int num2 = Int32.Parse(box2.Text);
             //Check number orientation
-            if (Int32.parse(box1.Text) > Int32.parse(box2.Text))
+            handleBoxNum(num1, num2);
+                    
+        }
+        //Checks number orientation then runs sorted numbers(low to high) handlePrimes
+        public void handleBoxNum(int num1, int num2)
+        {
+            int highNum;
+            int lowNum;
+            //Check number orientation
+            if(num1 > num2)
             {
                 highNum = num1;
+                lowNum = num2;
             }
             else
             {
-                highNum = num2
+                highNum = num2;
+                lowNum = num1;
             }
-            //Check if number is prime and display it
-            for(int i = num1; i <= highNum; i++)
+            //Handle all prime numbers
+            handlePrimes(lowNum, highNum);
+        }
+        //Check if number is prime and display it from the lowest number to the highest
+        public void handlePrimes(int lowNum, int highNum)
+        {
+            //Added at top so the for loop doesn't keep it as the same value
+            int lineCount = 0;
+            //Loop for all numbers between box1 and box2 
+            //Start condition is lowest box number. 
+            //End condition is highest box number
+            for(int i = lowNum; i <= highNum; i++)
             {
-                primeNumber(i);
+                //Check if number is prime
+                if(primeNumber(i))
+                {
+                    //Add new line at fifth number
+                    if(lineCount == 5)
+                    {
+                        result.AppendText("\r\n");
+                        lineCount = 0;
+                    }
+                    //Update lineCount because it gets set back to 0
+                    lineCount++;
+                    // Display prime numbers to third box
+                    result.AppendText(Convert.ToString(i + " "));
+                }
             }
         }
         //Check if number is prime
@@ -59,25 +92,12 @@ namespace WindowsFormsApp1
                 {
                     if (n % i == 0)
                     {
-                        return;
+                        return false;
                     }
                 }
             }
             //If it is a prime number
-            displayPrime(n);
-        }
-        //Display prime numbers to third text box with linesize of 5
-        public void displayPrimes(int prime)
-        {
-            int lineCount = 0;
-
-            if (lineCount == 5)
-            {
-                result.AppendText("\r\n");
-                lineCount = 0;
-            }
-            lineCount++;
-            result.AppendText(Convert.ToString(prime + " "));
+            return true;
         }
     }
 }
