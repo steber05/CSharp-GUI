@@ -20,38 +20,23 @@ namespace WindowsFormsApp1
         private void check_Click(object sender, EventArgs e)
         {            
             result.Clear();//Clear third textbox
-            int num1 = Convert.ToInt32(box1.Text);//Box 1
-            int num2 = Convert.ToInt32(box2.Text);//Box 2
-            LinkedList<int> nums = new LinkedList<int>();//Numbers between box 1 and box 2
-            LinkedList<int> primes = new LinkedList<int>();//Prime numbers in nums list
+            int num1 = Int32.parse(box1.Text);//Box 1
+            int num2 = Int32.parse(box2.Text);//Box 2
+            int highNum;
             //Check number orientation
-            nums = numberOrientation(num1, num2);
-            //Check if number is prime
-            //Add prime numbers to a list
-            primes = sortPrimes(nums);
-            //Display prime numbers to third text box with linesize of 5
-            displayPrimes(primes);
-
-        }
-        //Check number orientation and add to nums list
-        public LinkedList<int> numberOrientation(int num1, int num2)
-        {
-            LinkedList<int> nums = new LinkedList<int>();
-            if (num1 < num2)
+            if (Int32.parse(box1.Text) > Int32.parse(box2.Text))
             {
-                for (int i = num1; i <= num2; i++)
-                {
-                    nums.AddLast(i);
-                }
+                highNum = num1;
             }
             else
             {
-                for (int i = num2; i <= num1; i++)
-                {
-                    nums.AddLast(i);
-                }
+                highNum = num2
             }
-            return nums;
+            //Check if number is prime and display it
+            for(int i = num1; i <= highNum; i++)
+            {
+                primeNumber(i);
+            }
         }
         //Check if number is prime
         public bool primeNumber(int n)
@@ -74,41 +59,25 @@ namespace WindowsFormsApp1
                 {
                     if (n % i == 0)
                     {
-                        return false;
+                        return;
                     }
                 }
             }
             //If it is a prime number
-            return true;
-        }
-        //Add prime numbers to a list (Filters out 0 and 1) edited to not filter 1 and 0 as its done in primeNumber now
-        public LinkedList<int> sortPrimes(LinkedList<int> nums)
-        {
-            LinkedList<int> lst = new LinkedList<int>();
-            foreach (var num in nums)
-            {
-                if (primeNumber(num))//Removed error checking for 1 and 0 for this section
-                {
-                    lst.AddLast(num);
-                }
-            }
-            return lst;
+            displayPrime(n);
         }
         //Display prime numbers to third text box with linesize of 5
-        public void displayPrimes(LinkedList<int> primes)
+        public void displayPrimes(int prime)
         {
             int lineCount = 0;
 
-            foreach (var p in primes)
+            if (lineCount == 5)
             {
-                if (lineCount == 5)
-                {
-                    result.AppendText("\r\n");
-                    lineCount = 0;
-                }
-                lineCount++;
-                result.AppendText(Convert.ToString(p + " "));
+                result.AppendText("\r\n");
+                lineCount = 0;
             }
+            lineCount++;
+            result.AppendText(Convert.ToString(prime + " "));
         }
     }
 }
