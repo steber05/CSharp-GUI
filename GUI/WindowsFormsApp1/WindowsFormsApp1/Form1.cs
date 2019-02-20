@@ -20,38 +20,56 @@ namespace WindowsFormsApp1
         private void check_Click(object sender, EventArgs e)
         {            
             result.Clear();//Clear third textbox
-            int num1 = Convert.ToInt32(box1.Text);//Box 1
-            int num2 = Convert.ToInt32(box2.Text);//Box 2
-            LinkedList<int> nums = new LinkedList<int>();//Numbers between box 1 and box 2
-            LinkedList<int> primes = new LinkedList<int>();//Prime numbers in nums list
+            int num1 = Int32.Parse(box1.Text);
+            int num2 = Int32.Parse(box2.Text);
             //Check number orientation
-            nums = numberOrientation(num1, num2);
-            //Check if number is prime
-            //Add prime numbers to a list
-            primes = sortPrimes(nums);
-            //Display prime numbers to third text box with linesize of 5
-            displayPrimes(primes);
-
+            handleBoxNum(num1, num2);
+                    
         }
-        //Check number orientation and add to nums list
-        public LinkedList<int> numberOrientation(int num1, int num2)
+        //Checks number orientation then runs sorted numbers(low to high) handlePrimes
+        public void handleBoxNum(int num1, int num2)
         {
-            LinkedList<int> nums = new LinkedList<int>();
-            if (num1 < num2)
+            int highNum;
+            int lowNum;
+            //Check number orientation
+            if(num1 > num2)
             {
-                for (int i = num1; i <= num2; i++)
-                {
-                    nums.AddLast(i);
-                }
+                highNum = num1;
+                lowNum = num2;
             }
             else
             {
-                for (int i = num2; i <= num1; i++)
+                highNum = num2;
+                lowNum = num1;
+            }
+            //Handle all prime numbers
+            handlePrimes(lowNum, highNum);
+        }
+        //Check if number is prime and display it from the lowest number to the highest
+        public void handlePrimes(int lowNum, int highNum)
+        {
+            //Added at top so the for loop doesn't keep it as the same value
+            int lineCount = 0;
+            //Loop for all numbers between box1 and box2 
+            //Start condition is lowest box number. 
+            //End condition is highest box number
+            for(int i = lowNum; i <= highNum; i++)
+            {
+                //Check if number is prime
+                if(primeNumber(i))
                 {
-                    nums.AddLast(i);
+                    //Add new line at fifth number
+                    if(lineCount == 5)
+                    {
+                        result.AppendText("\r\n");
+                        lineCount = 0;
+                    }
+                    //Update lineCount because it gets set back to 0
+                    lineCount++;
+                    // Display prime numbers to third box
+                    result.AppendText(Convert.ToString(i + " "));
                 }
             }
-            return nums;
         }
         //Check if number is prime
         public bool primeNumber(int n)
@@ -80,35 +98,6 @@ namespace WindowsFormsApp1
             }
             //If it is a prime number
             return true;
-        }
-        //Add prime numbers to a list (Filters out 0 and 1) edited to not filter 1 and 0 as its done in primeNumber now
-        public LinkedList<int> sortPrimes(LinkedList<int> nums)
-        {
-            LinkedList<int> lst = new LinkedList<int>();
-            foreach (var num in nums)
-            {
-                if (primeNumber(num))//Removed error checking for 1 and 0 for this section
-                {
-                    lst.AddLast(num);
-                }
-            }
-            return lst;
-        }
-        //Display prime numbers to third text box with linesize of 5
-        public void displayPrimes(LinkedList<int> primes)
-        {
-            int lineCount = 0;
-
-            foreach (var p in primes)
-            {
-                if (lineCount == 5)
-                {
-                    result.AppendText("\r\n");
-                    lineCount = 0;
-                }
-                lineCount++;
-                result.AppendText(Convert.ToString(p + " "));
-            }
         }
     }
 }
