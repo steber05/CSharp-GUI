@@ -23,7 +23,11 @@ namespace WindowsFormsApp1
             int num1 = Int32.Parse(box1.Text);
             int num2 = Int32.Parse(box2.Text);
             //Check number orientation
-            handleBoxNum(num1, num2);
+            if (num1 > 0 || num2 > 0)
+            {
+                handleBoxNum(num1, num2);
+            }
+            
                     
         }
         //Checks number orientation then runs sorted numbers(low to high) handlePrimes
