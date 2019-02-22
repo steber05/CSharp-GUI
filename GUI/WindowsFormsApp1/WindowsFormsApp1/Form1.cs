@@ -22,7 +22,7 @@ namespace WindowsFormsApp1
             result.Clear();//Clear third textbox
             int num1 = Int32.Parse(box1.Text);
             int num2 = Int32.Parse(box2.Text);
-            //Check number orientation
+            //Check if there is atlease 1 value entered above 0
             if (num1 > 0 || num2 > 0)
             {
                 handleBoxNum(num1, num2);
